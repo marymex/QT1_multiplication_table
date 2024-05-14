@@ -17,6 +17,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pushButton2_clicked();
+
+    void on_spinBox_valueChanged(int arg1);
+
+    void updateTable();
+
+    void setItem(int row, int column);
+
 private:
     Ui::MainWindow *ui;
 };
