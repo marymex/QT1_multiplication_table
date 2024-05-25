@@ -11,11 +11,14 @@ Modify the interface of your project using Qt Designer.
 
 Examine the form.jpeg picture. It shows the arrangement of the widgets.
 
+![form](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/form.jpg)
+
 Add a button, a tableWidget, a groupBox on your form.
 
 Inside the groupBox add a label, a spinButton and a verticalSpacer.
 
-Set the verticalLayout for the groupbox: right mouth click -> Layout (Компоновка) -> Layout vertically (Скомпоновать по вертикали). 
+Set the verticalLayout for the groupbox: right mouth click -> Layout (Компоновка) -> Layout vertically (Скомпоновать по вертикали).
+
 
 ### Slots and signals
 
@@ -23,6 +26,8 @@ In QT some widgets send signals when the user is interracting with the form and 
 To catch a signal send by one widget, another widget has a function called "slot function". Now we are going to set some slot functions for some widgets. 
 
 Right-mouth-click on pushButton -> go to slot -> clicked(). See go_to_slot___clicked.jpeg. 
+
+![go_to_slot___clicked](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/go_to_slot___clicked.jpeg)
 
 Those actions auto-generate some code in mainwindow.cpp and mainwindow.h. Namely, they add a slot function which will be run when the user clicks on the button. In mainwindow.h we can find the declaration of a new function: 
 
@@ -134,4 +139,6 @@ You can notice that widget pushButton has 4 numbers instead of just 2. This is b
 
 Try to comment out those lines and run the code. Now stretch the form. Without the layout the widgets will not change their side. 
 See no_layout.jpeg. 
+
+![no_layout](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/no_layout.jpeg)
 
