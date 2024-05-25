@@ -59,7 +59,29 @@ void MainWindow::on_spinBox_valueChanged(int arg1)
     updateTable();
 }
 ```
-Please kindly remember to add declarations of the functions in mainwindow.h.  
+Here we use a new function updateTable() which was NOT auto-generated. That's why we need to add the declaration of this function in mainwindow.h:
+
+```sh
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
+    void updateTable(); // NOTE this one
+
+private slots:
+    void on_pushButton_clicked();
+    void on_spinBox_valueChanged(int arg1);
+
+private:
+    Ui::MainWindow *ui;
+};
+
+```
 
 In the project the function updateTable is run for this purpose. Note that every time when you code a new function in mainwindow.cpp and declare it as a member of MainWindow class (you do that by writing MainWindow:: before the name of the function) you also need to write the declaration of this function in mainwimdow.h. So you need to modify two files (.h and .cpp). 
 
@@ -90,7 +112,7 @@ void MainWindow::on_pushButton_clicked()
 }
 ```
 
-The function on_pushButton_clicked() calls the function setItem(int row, int column) which fills the table. Please kindly remember to add declarations of the functions in mainwindow.h.  
+The function on_pushButton_clicked() calls the function setItem(int row, int column) which fills the table. Please kindly remember to add declaration of the function setItem(int row, int column) in mainwindow.h.  
 
 ### Layout 
 
