@@ -27,7 +27,7 @@ To catch a signal send by one widget, another widget has a function called "slot
 
 Right-mouth-click on pushButton -> go to slot -> clicked(). See go_to_slot___clicked.jpeg. 
 
-![go_to_slot___clicked](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/go_to_slot___clicked.jpeg)
+![go_to_slot___clicked](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/go_to_slot___clicked.jpg)
 
 Those actions auto-generate some code in mainwindow.cpp and mainwindow.h. Namely, they add a slot function which will be run when the user clicks on the button. In mainwindow.h we can find the declaration of a new function: 
 
