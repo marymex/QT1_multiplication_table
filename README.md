@@ -26,14 +26,18 @@ Right-mouth-click on pushButton -> go to slot -> clicked(). See go_to_slot___cli
 
 Those actions auto-generate some code in mainwindow.cpp and mainwindow.h. Namely, they add a slot function which will be run when the user clicks on the button. In mainwindow.h we can find the declaration of a new function: 
 
+```sh
 void on_pushButton_clicked();
+```
 
 In mainwindow.cpp (NOTE, this file is NOT mainwindow.h) we see the body of the function:
 
+```sh
 void MainWindow::on_pushButton_clicked()
 {
 
 }
+```
 
 Inside the body of the function we write code which will be executed when we click on the button.
 
@@ -81,6 +85,7 @@ The function on_pushButton_clicked() calls the function setItem(int row, int col
 
 The followig code is the constructor of MainWindow class. We add a grid layout to the central widget. We add tableWidget, groupBox and pushButton to the layout. 
 
+```sh
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -91,6 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
     gridlayout->addWidget(ui->groupBox, 0, 1);
     gridlayout->addWidget(ui->pushButton, 1, 0, 1, 2);
 }
+```
 
 Try to comment out those lines and run the code. Now stretch the form. Without the layout the widgets will not change their side. 
 See no_layout.jpeg. 
