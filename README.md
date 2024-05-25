@@ -53,14 +53,18 @@ Modify code in mainwindow.cpp for "void MainWindow::on_pushButton_clicked()"
 When the button is clicked the table should get filled with the multiplication results: (row_index+1) x (column_index + 1).
 This is done by the following code: 
 
+```sh
 void MainWindow::setItem(int row, int column)
 {
     QTableWidgetItem *newItem = new QTableWidgetItem( QObject::tr("%1").arg((row+1)*(column+1)) );
     ui->tableWidget->setItem(row, column, newItem);
 }
+```
 
+```sh
 void MainWindow::on_pushButton_clicked()
 {
+
     for(int i = 0; i < ui->tableWidget->columnCount(); i++)
     {
         for(int j = 0; j < ui->tableWidget->rowCount(); j++)
@@ -69,6 +73,7 @@ void MainWindow::on_pushButton_clicked()
         }
     }
 }
+```
 
 The function on_pushButton_clicked() calls the function setItem(int row, int column) which fills the table. Please kindly remember to add declarations of the functions in mainwindow.h.  
 
