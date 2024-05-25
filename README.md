@@ -46,9 +46,20 @@ Simularly, generate a slot-function for the spinBox: Right-mouth-click on spinBo
 The idea of the task is that when the user changes the value inside spinBox to n, tableWidget displays an empty square table with n rows and n columns.   
 For this purpose we need to take the number inside spinBox and set the number of rows and columns inside the table:  
 
-int cnt = ui->spinBox->text().toInt();
-ui->tableWidget->setColumnCount(cnt);
-ui->tableWidget->setRowCount(cnt);
+```sh
+void MainWindow::updateTable()
+{
+    int cnt = ui->spinBox->text().toInt();
+    ui->tableWidget->setColumnCount(cnt);
+    ui->tableWidget->setRowCount(cnt);
+}
+
+void MainWindow::on_spinBox_valueChanged(int arg1)
+{
+    updateTable();
+}
+```
+Please kindly remember to add declarations of the functions in mainwindow.h.  
 
 In the project the function updateTable is run for this purpose. Note that every time when you code a new function in mainwindow.cpp and declare it as a member of MainWindow class (you do that by writing MainWindow:: before the name of the function) you also need to write the declaration of this function in mainwimdow.h. So you need to modify two files (.h and .cpp). 
 
