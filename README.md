@@ -83,7 +83,7 @@ The function on_pushButton_clicked() calls the function setItem(int row, int col
 
 ### Layout 
 
-The followig code is the constructor of MainWindow class. We add a grid layout to the central widget. We add tableWidget, groupBox and pushButton to the layout. 
+The followig code is the constructor of MainWindow class. We add a grid layout to the central widget. We add tableWidget, groupBox and pushButton to the layout. A grid layout is similar to a table. We specify the number of row and colums for each widget.
 
 ```sh
 MainWindow::MainWindow(QWidget *parent)
@@ -97,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
     gridlayout->addWidget(ui->pushButton, 1, 0, 1, 2);
 }
 ```
+You can notice that widget pushButton has 4 numbers instead of just 2. This is because we want this widget to take 2 cells of the grid layout. 
 
 Try to comment out those lines and run the code. Now stretch the form. Without the layout the widgets will not change their side. 
 See no_layout.jpeg. 
