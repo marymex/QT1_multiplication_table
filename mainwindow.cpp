@@ -9,15 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    // make renderarea class
-    // set layout
-    //QSizePolicy sizepolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //sizepolicy.setHorizontalStretch(0);
-    //sizepolicy.setVerticalStretch(0);
-    //sizepolicy.setHeightForWidth(ui->tableView->sizePolicy().hasHeightForWidth());
-    //ui->tableView->setSizePolicy(sizepolicy);
-
+    
     QGridLayout *gridlayout = new QGridLayout(ui->centralwidget);
     gridlayout->addWidget(ui->tableWidget, 0, 0);
     gridlayout->addWidget(ui->groupBox, 0, 1);
@@ -30,17 +22,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setItem(int row, int column) // self-made function (not auto-generated) 
-{
-    QTableWidgetItem *newItem = new QTableWidgetItem( QObject::tr("%1").arg((row+1)*(column+1)) );
-    ui->tableWidget->setItem(row, column, newItem);
-}
-
 void MainWindow::updateTable()  // self-made function (not auto-generated) 
 {
     int cnt = ui->spinBox->text().toInt();
     ui->tableWidget->setColumnCount(cnt);
     ui->tableWidget->setRowCount(cnt);
+}
+
+void MainWindow::on_spinBox_valueChanged(int arg1) // slot function, auto-generated
+{
+    updateTable();
+}
+
+void MainWindow::setItem(int row, int column) // self-made function (not auto-generated) 
+{
+    QTableWidgetItem *newItem = new QTableWidgetItem( QObject::tr("%1").arg((row+1)*(column+1)) );
+    ui->tableWidget->setItem(row, column, newItem);
 }
 
 void MainWindow::on_pushButton2_clicked() // slot function, auto-generated
@@ -55,8 +52,5 @@ void MainWindow::on_pushButton2_clicked() // slot function, auto-generated
 
 }
 
-void MainWindow::on_spinBox_valueChanged(int arg1) // slot function, auto-generated
-{
-    updateTable();
-}
+
 
