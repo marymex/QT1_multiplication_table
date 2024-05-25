@@ -30,20 +30,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setItem(int row, int column)
+void MainWindow::setItem(int row, int column) // self-made function (not auto-generated) 
 {
     QTableWidgetItem *newItem = new QTableWidgetItem( QObject::tr("%1").arg((row+1)*(column+1)) );
     ui->tableWidget->setItem(row, column, newItem);
 }
 
-void MainWindow::updateTable()
+void MainWindow::updateTable()  // self-made function (not auto-generated) 
 {
     int cnt = ui->spinBox->text().toInt();
     ui->tableWidget->setColumnCount(cnt);
     ui->tableWidget->setRowCount(cnt);
 }
 
-void MainWindow::on_pushButton2_clicked()
+void MainWindow::on_pushButton2_clicked() // slot function, auto-generated
 {
     for(int i = 0; i < ui->tableWidget->columnCount(); i++)
     {
@@ -55,7 +55,7 @@ void MainWindow::on_pushButton2_clicked()
 
 }
 
-void MainWindow::on_spinBox_valueChanged(int arg1)
+void MainWindow::on_spinBox_valueChanged(int arg1) // slot function, auto-generated
 {
     updateTable();
 }
