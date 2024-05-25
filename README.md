@@ -28,7 +28,7 @@ Those actions auto-generate some code in mainwindow.cpp and mainwindow.h. Namely
 
 void on_pushButton_clicked();
 
-In mainwindow.cpp (DIFFERENT FILE, not mainwindow.h) we see the body of the function:
+In mainwindow.cpp (NOTE, this file is NOT mainwindow.h) we see the body of the function:
 
 void MainWindow::on_pushButton_clicked()
 {
