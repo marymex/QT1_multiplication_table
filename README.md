@@ -1,78 +1,92 @@
-# Qt
-
-Qt Widgets applications introduce several new topics and concepts.
-
-1. Qt language additions to C++. Classes `QObject`, `QList`, `QString`, etc.
-2. UI designer.
-3. Widgets and their hierarchy.
-
-All libraries, needed to make Qt applications are available in the Qt source package that you have if you installed Qt Creator. If you don't have Qt Creator and don't want to use it, you can still install only the source package (the libraries) here - https://www.qt.io/offline-installers.
-
-
-# UI design
-
-There are two main ways to design user interface in Qt.
-
-1. (Default) Use Qt Designer, graphically modify a .ui file, convert it to code and connect it to your project.
-2. Use code directly.
-
-In example projects and in the default Qt Widgets project you have a file `mainwindow.ui`. This file describes user interface of your program and it can be modified using graphical tools: dragging and dropping buttons, moving them around.
-
-When you build your project, this file gets converted to a C++ code file `ui_mainwindow.h`. You can see the C++ file getting included in `mainwindow.cpp`.
-
-By default all interface elements are child object of the root element `ui`. The line `ui->setupUi(this);` connects your code (`mainwindow.cpp`) and generated UI code (`ui_mainwindow.h`).
-
-After you run this line, you can access UI elements like this;
-
-```cpp
-    QString buttonText = ui->myButton->text();
-```
-
-This line gets accesses a button object called "myButton" and call its method `text()`. The method returns the button's label which is then saved to a variable `buttonText`.
-
-If you want to change the label, you can do it in code:
-
-```cpp
-    ui->myButton->setText("Click me!");
-```
-
-You can use such code to set up all the UI elements instead of using Designer.
-
-# Widgets
-
-Qt Widgets have a parent-child hierarchy. Every widget except the main window itself has a parent. Every time you add a new button or a new label, you don't just add it to your whole application. Instead, you place it in its container, which is the parent.
-
-When you add a new widget, you must specify its parent. When the parent is destroyed (for example, a window or a tab is closed), all its children are also destroyed. This way you don't have to manually free memory of every widget, it is managed automatically.
-
-
 # Tasks
 
-## Task 1. Hello, world.
+## Task 1. Multiplication table 
 
-Examine the project ex1_hello_world or create a new Qt Widgets project.
+Examine the project multiplication_table.pro to create a new Qt Widgets project. 
+The task is to output a multimplication table on the form using a tableWidget. 
 
 ### Designer
 
-Modify the interface using Qt Designer. Add a button and change its label text.
+Modify the interface of your project using Qt Designer.
 
-### Code
+Examine the form.jpeg picture. It shows the arrangement of the widgets.
 
-Modify the interface using code. Change some text (button label, text label, window title) to something else.
+Add a button, a tableWidget, a groupBox on your form.
 
-Change font size for text label to 10.
+Inside the groupBox add a label, a spinButton and a verticalSpacer.
 
-To change font size:
+Set the verticalLayout for the groupbox: right mouth click -> Layout (Компоновка) -> Layout vertically (Скомпоновать по вертикали). 
 
-1. Save current font to a `QFont` variable with the method `->font()`.
-2. Use `setPointSize()` to change its size.
-3. Use `setFont(newFont)` on the label to set the new font.
+### Slots and signals
 
-Add another SpinBox widget that will control the height of the rectangles in the fractal.
+In QT some widgets send signals when the user is interracting with the form and some other widgets catch those signals.
+To catch a signal send by one widget, another widget has a function called "slot function". Now we are going to set some slot functions for some widgets. 
 
-Use signals and slots to connect spin box widgets with their respective variables.
+Right-mouth-click on pushButton -> go to slot -> clicked(). See go_to_slot___clicked.jpeg. 
 
-Test that you can change the appearance of the fractal by interacting with spin boxes.
+Those actions auto-generate some code in mainwindow.cpp and mainwindow.h. Namely, they add a slot function which will be run when the user clicks on the button. In mainwindow.h we can find the declaration of a new function: 
 
-**Add limits on spin box inputs. Maximum number of levels should be 4-5. Maximum size should allow the fractal to fit the window. Size and levels can't be negative.**
+void on_pushButton_clicked();
 
+In mainwindow.cpp (DIFFERENT FILE, not mainwindow.h) we see the body of the function:
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+Inside the body of the function we write code which will be executed when we click on the button.
+
+Simularly, generate a slot-function for the spinBox: Right-mouth-click on spinBox -> go to slot -> valuechanged().  
+
+The idea of the task is that when the user changes the value inside spinBox to n, tableWidget displays an empty square table with n rows and n columns.   
+For this purpose we need to take the number inside spinBox and set the number of rows and columns inside the table:  
+
+int cnt = ui->spinBox->text().toInt();
+ui->tableWidget->setColumnCount(cnt);
+ui->tableWidget->setRowCount(cnt);
+
+In the project the function updateTable is run for this purpose. Note that every time when you code a new function in mainwindow.cpp and declare it as a member of MainWindow class (you do that by writing MainWindow:: before the name of the function) you also need to write the declaration of this function in mainwimdow.h. So you need to modify two files (.h and .cpp). 
+
+Now we fill the table with numbers.
+Modify code in mainwindow.cpp for "void MainWindow::on_pushButton_clicked()"
+When the button is clicked the table should get filled with the multiplication results: (row_index+1) x (column_index + 1).
+This is done by the following code: 
+
+void MainWindow::setItem(int row, int column)
+{
+    QTableWidgetItem *newItem = new QTableWidgetItem( QObject::tr("%1").arg((row+1)*(column+1)) );
+    ui->tableWidget->setItem(row, column, newItem);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    for(int i = 0; i < ui->tableWidget->columnCount(); i++)
+    {
+        for(int j = 0; j < ui->tableWidget->rowCount(); j++)
+        {
+            setItem(i, j);
+        }
+    }
+}
+
+The function on_pushButton_clicked() calls the function setItem(int row, int column) which fills the table. Please kindly remember to add declarations of the functions in mainwindow.h.  
+
+### Layout 
+
+The followig code is the constructor of MainWindow class. We add a grid layout to the central widget. We add tableWidget, groupBox and pushButton to the layout. 
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    QGridLayout *gridlayout = new QGridLayout(ui->centralwidget);
+    gridlayout->addWidget(ui->tableWidget, 0, 0);
+    gridlayout->addWidget(ui->groupBox, 0, 1);
+    gridlayout->addWidget(ui->pushButton, 1, 0, 1, 2);
+}
+
+Try to comment out those lines and run the code. Now stretch the form. Without the layout the widgets will not change their side. 
+See no_layout.jpeg. 
 
