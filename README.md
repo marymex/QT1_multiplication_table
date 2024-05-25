@@ -140,5 +140,5 @@ You can notice that widget pushButton has 4 numbers instead of just 2. This is b
 Try to comment out those lines and run the code. Now stretch the form. Without the layout the widgets will not change their side. 
 See no_layout.jpeg. 
 
-![no_layout](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/no_layout.jpeg)
+![no_layout](https://github.com/marymex/QT_layouts_buttons_tableWidget/blob/master/no_layout.jpg)
 
