@@ -4,6 +4,7 @@
 
 Examine the project multiplication_table.pro to create a new Qt Widgets project. 
 The task is to output a multimplication table on the form using a tableWidget. 
+You need to do that by creating a similar QT project from scratch following the steps bellow. 
 
 ### Designer
 
